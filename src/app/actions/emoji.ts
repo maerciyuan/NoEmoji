@@ -16,5 +16,16 @@ export async function submitEmoji(id: number) {
     // TODO: Validate user and send emoji data
 }
 
+/**
+ * Called when the user attempts to update their password.
+ */
+export async function updatePwd(newPwd: string) {
+
+}
 
 
+/**
+ * Called when the user attempts to log out.
+ */
+export async function logout() {
+}
