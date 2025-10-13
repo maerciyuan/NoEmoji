@@ -5,6 +5,7 @@ import { EMOJIS } from "@/app/emojis";
 import { submitEmoji } from "@/app/actions/emoji";
 import { useState } from "react";
 import { toast } from "sonner";
+import { raiseError } from "@/app/toast";
 
 export default function ClientEmojiPanel() {
     const [submittingId, setSubmittingId] = useState(-1);
@@ -16,12 +17,7 @@ export default function ClientEmojiPanel() {
             await submitEmoji(id);
             toast.success("已提交表情");
         } catch (e) {
-            toast.error(
-                <Flex gap="1" direction="column">
-                    <Text size="1" weight="bold">发生错误</Text>
-                    <Text size="1">{String(e)}</Text>
-                </Flex>
-            );
+            raiseError(e);
         } finally {
             setSubmittingId(-1);
         }
