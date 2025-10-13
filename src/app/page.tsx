@@ -2,8 +2,13 @@ import ClientEmojiPanel from "@/app/client-emoji-panel";
 import { cookies } from "next/headers";
 import { Card, Flex, Heading, Text } from "@radix-ui/themes";
 import { EMOJIS } from "@/app/emojis";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
+    const cookieStore = await cookies();
+    const uid = cookieStore.get("uid");
+    if (!uid) return redirect("/login");
+
     // TODO: Fetches emoji history for the user
     async function getEmojiHistory(): Promise<{ id: number, date: Date }[]> {
         const cookieStore = await cookies();

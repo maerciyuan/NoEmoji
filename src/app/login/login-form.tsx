@@ -3,8 +3,9 @@
 import { Button, Flex, Heading, TextField } from "@radix-ui/themes";
 import { useState } from "react";
 import { raiseError } from "@/app/toast";
-import { loginOrRegister } from "@/app/actions/account";
+import { login } from "@/app/actions/account";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 export function LoginForm() {
     const [username, setUsername] = useState("");
@@ -12,12 +13,16 @@ export function LoginForm() {
 
     async function onSubmit() {
         try {
-            await loginOrRegister(username, pwd);
+            await login(username, pwd);
             toast.success("登录成功");
             location.reload();
         } catch (e) {
             raiseError(e);
         }
+    }
+
+    function onRegister() {
+        redirect("/register");
     }
 
     return <Flex direction="column" gap="3" minWidth="20em" p="3">
@@ -37,6 +42,7 @@ export function LoginForm() {
             type="password"
         />
 
-        <Button onClick={onSubmit} disabled={!username || !pwd} size="3">登录 / 注册</Button>
+        <Button onClick={onSubmit} disabled={!username || !pwd} size="3">登录</Button>
+        <Button onClick={onRegister} color="gray" size="3">注册</Button>
     </Flex>;
 }

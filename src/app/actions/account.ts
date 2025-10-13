@@ -1,9 +1,16 @@
 "use server";
 
 /**
- * Called when the user tries to log in/register with provided username and password.
+ * Called when the user tries to log in.
  */
-export async function loginOrRegister(user: string, pwd: string) {
+export async function login(user: string, pwd: string) {
+
+}
+
+/**
+ * Called when the user tries to register.
+ */
+export async function register(ui: Omit<UserInfo, "uid" | "super">, user: string, pwd: string) {
 
 }
 
